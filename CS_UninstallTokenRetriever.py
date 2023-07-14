@@ -30,8 +30,8 @@ def query_api():
 def copy_to_clipboard():
 
     # Clears the clipboard and sets it to the token field value
-    root.clipboard_clear()
-    root.clipboard_append(token_field.get().strip())
+    window.clipboard_clear()
+    window.clipboard_append(token_field.get().strip())
 
 # Function for clearing the contents of all entry box widgets
 def clear_all():
@@ -50,27 +50,27 @@ def clear_all():
 if __name__ == "__main__":
    
     # Creates a GUI window
-    root = tk.Tk()
+    window = tk.Tk()
 
     # Sets the background color of GUI window
-    root.configure(background = 'white')
+    window.configure(background = 'white')
 
     # Sets the initial size of GUI window
-    root.geometry("")
+    window.geometry("")
 
     # Sets the name of GUI window
-    root.title("CrowdStrike Uninstall Token Retriever")
+    window.title("CrowdStrike Uninstall Token Retriever")
 
     # Sets the scale relative to other widgets
-    root.rowconfigure((0, 1, 2, 3, 4, 5, 6), weight = 1)
-    root.columnconfigure((0, 1, 2), weight = 1)
+    window.rowconfigure((0, 1, 2, 3, 4, 5, 6), weight = 1)
+    window.columnconfigure((0, 1, 2), weight = 1)
 
     # Creates label widgets
-    label_1 = tk.Label(root, text = "API Client : ", fg = 'black', bg = 'white')
-    label_2 = tk.Label(root, text = "API Secret : ", fg = 'black', bg = 'white')
-    label_3 = tk.Label(root, text = "Hostname : ", fg = 'black', bg = 'white')
-    label_4 = tk.Label(root, text = "Audit Comment : ", fg = 'black', bg = 'white')
-    label_5 = tk.Label(root, text = "Uninstall Token : ", fg = 'black', bg = 'white')
+    label_1 = tk.Label(window, text = "API Client : ", fg = 'black', bg = 'white')
+    label_2 = tk.Label(window, text = "API Secret : ", fg = 'black', bg = 'white')
+    label_3 = tk.Label(window, text = "Hostname : ", fg = 'black', bg = 'white')
+    label_4 = tk.Label(window, text = "Audit Comment : ", fg = 'black', bg = 'white')
+    label_5 = tk.Label(window, text = "Uninstall Token : ", fg = 'black', bg = 'white')
 
     # Grid method is used for placing the widgets at respective positions in table like structure
     label_1.grid(row = 0, column = 0, padx = (10, 0), pady = 5, sticky = "NSE")
@@ -80,11 +80,11 @@ if __name__ == "__main__":
     label_5.grid(row = 5, column = 0, padx = (10, 0), pady = 5, sticky = "NSE")
 
     # Creates entry box widgets for filling or typing the information
-    client_field = tk.Entry(root)
-    secret_field = tk.Entry(root)
-    host_field = tk.Entry(root)
-    comment_field = tk.Entry(root)
-    token_field = tk.Entry(root)
+    client_field = tk.Entry(window)
+    secret_field = tk.Entry(window)
+    host_field = tk.Entry(window)
+    comment_field = tk.Entry(window)
+    token_field = tk.Entry(window)
 
     client_field.grid(row = 0, column = 1, columnspan = 2, padx = (0, 10), pady = 5, sticky = "EW")
     secret_field.grid(row = 1, column = 1, columnspan = 2, padx = (0, 10), pady = 5, sticky = "EW")
@@ -93,13 +93,13 @@ if __name__ == "__main__":
     token_field.grid(row = 5, column = 1, padx = 0, pady = 5, sticky="W")
 
     # Creates button widgets linked to the query_api and clear_all functions
-    button_1 = tk.Button(root, text = "Submit", bg = "white", fg = "black", width = 6, command = query_api)
-    button_2 = tk.Button(root, text = "Clear", bg = "white", fg = "black", width = 6, command = clear_all)
-    button_3 = tk.Button(root, text = "Copy", bg = "white", fg = "black", width = 1, command = copy_to_clipboard)
+    button_1 = tk.Button(window, text = "Submit", bg = "white", fg = "black", width = 6, command = query_api)
+    button_2 = tk.Button(window, text = "Clear", bg = "white", fg = "black", width = 6, command = clear_all)
+    button_3 = tk.Button(window, text = "Copy", bg = "white", fg = "black", width = 1, command = copy_to_clipboard)
 
     button_1.grid(row = 4, column = 1, padx = 0, pady = 5, sticky = "W")
     button_2.grid(row = 4, column = 1, padx = 0, pady = 5, sticky = "E")
     button_3.grid(row = 5, column = 2, padx = (5, 10), pady = 5)
 
     # Starts the GUI
-    root.mainloop()
+    window.mainloop()
