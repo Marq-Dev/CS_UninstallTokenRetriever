@@ -16,11 +16,11 @@ def query_api():
     hosts_endpoint = fp.Hosts(client_id = cs_client, client_secret = cs_secret)
     sensor_endpoint = fp.SensorUpdatePolicy(client_id = cs_client, client_secret = cs_secret)
 
-    # Queries the API using the Device Hostname
+    # Queries the API for the Agent ID using the Device Hostname
     # Response returned as a dict, which gets filtered down using keys
     cs_aid = hosts_endpoint.query_devices_by_filter(filter = f"hostname:'{cs_host}*'")["body"]["resources"][0]
 
-    # Queries the API using the Agent ID and submits a comment for audit logs
+    # Queries the API for the uninstall token using the Agent ID and submits a comment for audit logs
     cs_token = sensor_endpoint.reveal_uninstall_token(audit_message = cs_comment, device_id = cs_aid)["body"]["resources"][0]["uninstall_token"]
 
     # Inserts the response_token value in the entry box widget.
@@ -34,7 +34,7 @@ def copy_to_clipboard():
     window.clipboard_append(token_field.get().strip())
 
 # Function for clearing the contents of all entry box widgets
-def clear_all():
+def clear_field():
 
     # Deletes all content inside entry box widgets
     client_field.delete(0, tk.END)
@@ -94,7 +94,7 @@ if __name__ == "__main__":
 
     # Creates button widgets linked to the query_api and clear_all functions
     button_1 = tk.Button(window, text = "Submit", bg = "white", fg = "black", width = 6, command = query_api)
-    button_2 = tk.Button(window, text = "Clear", bg = "white", fg = "black", width = 6, command = clear_all)
+    button_2 = tk.Button(window, text = "Clear", bg = "white", fg = "black", width = 6, command = clear_field)
     button_3 = tk.Button(window, text = "Copy", bg = "white", fg = "black", width = 1, command = copy_to_clipboard)
 
     button_1.grid(row = 4, column = 1, padx = 0, pady = 5, sticky = "W")
