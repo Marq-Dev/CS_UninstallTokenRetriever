@@ -34,7 +34,7 @@ def copy_to_clipboard():
     window.clipboard_append(token_field.get().strip())
 
 # Function for clearing the contents of all entry box widgets
-def clear_field():
+def clear_all():
 
     # Deletes all content inside entry box widgets
     client_field.delete(0, tk.END)
@@ -94,7 +94,7 @@ if __name__ == "__main__":
 
     # Creates button widgets linked to the query_api and clear_all functions
     button_1 = tk.Button(window, text = "Submit", bg = "white", fg = "black", width = 6, command = query_api)
-    button_2 = tk.Button(window, text = "Clear", bg = "white", fg = "black", width = 6, command = clear_field)
+    button_2 = tk.Button(window, text = "Clear", bg = "white", fg = "black", width = 6, command = clear_all)
     button_3 = tk.Button(window, text = "Copy", bg = "white", fg = "black", width = 1, command = copy_to_clipboard)
 
     button_1.grid(row = 4, column = 1, padx = 0, pady = 5, sticky = "W")
