@@ -8,7 +8,6 @@ from falconpy import Hosts, SensorUpdatePolicy
 def query_api():
     
     try:
-        
         # Get content from entry box widget
         cs_client = str(client_field.get().strip())
         cs_secret = str(secret_field.get().strip())
@@ -17,10 +16,8 @@ def query_api():
 
         # Checks if all of the required entry box widgets are filled out
         if not all([cs_client, cs_secret, cs_host, cs_comment]):
-            
             # Displays a popup windows with an error message
             messagebox.showerror("Error", "All fields are required!")
-            
             return
 
         # Sets the Client ID and Secret for the API endpoints
@@ -31,31 +28,23 @@ def query_api():
         hosts_response = hosts_endpoint.query_devices_by_filter(filter = f"hostname:'{cs_host}*'")
 
         # Checks if the query is successful and filters down the response dict using keys
-        if hosts_response["status_code"] == 200:
-            
-            cs_aid = hosts_response["body"]["resources"][0]
-        
+        if hosts_response['status_code'] == 200:
+            cs_aid = hosts_response['body']['resources'][0]
         else:
             
-            for error_result in hosts_response["body"]["errors"]:
-                
-                messagebox.showerror("Error", str(error_result["message"]))
-            
+            for error_result in hosts_response['body']['errors']:
+                messagebox.showerror("Error", str(error_result['message']))
             return
 
         # Queries the API for the uninstall token using the Agent ID and submits a comment for audit logs
         sensor_response = sensor_endpoint.reveal_uninstall_token(audit_message = cs_comment, device_id = cs_aid)
 
-        if sensor_response["status_code"] == 200:
-            
-            cs_token = sensor_response["body"]["resources"][0]["uninstall_token"]
-        
+        if sensor_response['status_code'] == 200:
+            cs_token = sensor_response['body']['resources'][0]['uninstall_token']
         else:
             
-            for error_result in sensor_response["body"]["errors"]:
-                
-                messagebox.showerror("Error", str(error_result["message"]))
-            
+            for error_result in sensor_response['body']['errors']:
+                messagebox.showerror("Error", str(error_result['message']))
             return
 
         # Inserts the response_token value in the entry box widget.
@@ -63,20 +52,17 @@ def query_api():
     
     # Exception handling
     except Exception as e:
-        
         messagebox.showerror("Error", str(e))
 
 # Function for copying the current entry box widget value to the clipboard
 def copy_to_clipboard():
     
     try:
-        
         # Clears the clipboard and sets it to the token field value
         window.clipboard_clear()
         window.clipboard_append(token_field.get().strip())
     
     except Exception as e:
-        
         messagebox.showerror("Error", str(e))
 
 # Function for clearing the contents of all entry box widgets
